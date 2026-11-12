@@ -1,0 +1,257 @@
+:root {
+    --bg: #1e1e1e;
+    --card-bg: #2b2b2b;
+    --input-bg: #111;
+    --primary: #0078d4;
+    --danger: #d13438;
+    --text: #ffffff;
+    --text-muted: #aaaaaa;
+    --border: #444444;
+}
+
+body.light-mode {
+    --bg: #f3f3f3;
+    --card-bg: #ffffff;
+    --input-bg: #eeeeee;
+    --primary: #0078d4;
+    --danger: #d13438;
+    --text: #000000;
+    --text-muted: #666666;
+    --border: #cccccc;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    width: 100%;
+    max-width: 1600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+h1 { margin: 0; font-size: 24px; }
+h2 { font-size: 16px; color: var(--text-muted); margin-top: 0; }
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: background 0.2s, transform 0.2s;
+    color: var(--text);
+}
+
+.icon-btn:hover {
+    background: var(--border);
+    transform: scale(1.1);
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+}
+
+.row { display: flex; gap: 10px; align-items: center; }
+.col { display: flex; flex-direction: column; gap: 5px; }
+
+input[type="text"] {
+    background: var(--input-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 8px;
+    border-radius: 4px;
+    outline: none;
+    flex: 1;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+button {
+    background: var(--border);
+    color: var(--text);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+button:hover { opacity: 0.8; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+button.primary { background: var(--primary); color: #fff; }
+
+button.danger {
+    background: var(--danger);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.dup-group {
+    margin-bottom: 15px;
+    border-left: 4px solid var(--primary);
+    padding-left: 10px;
+}
+.dup-title {
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+.dup-item {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-left: 15px;
+}
+
+.custom-progress {
+    width: 100%;
+    height: 15px;
+    background-color: var(--input-bg);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+.custom-progress-bar {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0%; 
+    background-color: var(--primary);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 1rem 1rem;
+    animation: progress-bar-stripes 1s linear infinite;
+    transition: width 0.3s ease-out;
+}
+.custom-progress-bar.is-marquee {
+    width: 30% !important;
+    transition: none;
+    animation: progress-bar-stripes 1s linear infinite, marquee-slide 1.2s linear infinite alternate;
+}
+@keyframes progress-bar-stripes {
+    0% { background-position: 1rem 0; }
+    100% { background-position: 0 0; }
+}
+@keyframes marquee-slide {
+    0% { left: -30%; }
+    100% { left: 100%; }
+}
+
+#folderList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+}
+#folderList li:hover { background: var(--card-bg) !important; }
+#folderList li.selected { background: var(--primary) !important; color: #fff; }
+
+.delete-icon {
+    color: var(--danger);
+    font-weight: bold;
+    padding: 0 5px;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.delete-icon:hover { opacity: 1; transform: scale(1.2); }
+
+.input-container { position: relative; width: 100%; }
+.clear-icon {
+    position: absolute; right: 10px; top: 50%;
+    transform: translateY(-50%); color: var(--text-muted);
+    cursor: pointer; font-size: 14px;
+    transition: color 0.2s; user-select: none;
+}
+.clear-icon:hover { color: var(--text); }
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-box {
+    background: var(--card-bg);
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    text-align: center;
+    min-width: 300px;
+    color: var(--text);
+}
+.modal-box p { margin-top: 0; margin-bottom: 20px; font-size: 15px; line-height: 1.5; }
+.modal-actions { display: flex; justify-content: center; gap: 15px; }
+
+input[type="text"]:focus, button:focus { outline: none; box-shadow: none; }
+input[type="text"]:focus { background-color: var(--input-bg); color: var(--text); border-color: var(--primary); }
+button:focus { background-color: inherit; }
+input[type="text"]:focus, input[type="text"]:active, button:focus, button:active {
+    outline: none !important; box-shadow: none !important; -webkit-tap-highlight-color: transparent;
+}
+button:focus { background-color: var(--border); }
+button.primary:focus { background-color: var(--primary); }
+button.danger:focus { background-color: var(--danger); }
+input[type="text"]:focus { background-color: var(--input-bg); color: var(--text); border-color: var(--primary); }
+button::-moz-focus-inner { border: 0; }
+button:-moz-focusring { outline: 1px dotted ButtonText; }
+
+#resultPage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-width: 1600px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#aboutModal a:hover {
+    text-decoration: underline !important;
+    opacity: 0.8;
+}

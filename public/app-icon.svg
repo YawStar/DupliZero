@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Main Document Gradient -->
+    <linearGradient id="docGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5E2B" />
+      <stop offset="100%" stop-color="#E63C0B" />
+    </linearGradient>
+    
+    <!-- Back Dashed Document Gradient -->
+    <linearGradient id="backDocGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3EF" />
+      <stop offset="100%" stop-color="#FFE3D9" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background (Optional: Remove if you need transparent background) -->
+  <!-- <rect width="500" height="500" fill="#ffffff" /> -->
+
+  <g transform="translate(100, 100)">
+    
+    <!-- 1. Back Dashed Document -->
+    <rect x="0" y="40" width="130" height="220" rx="6" 
+          fill="url(#backDocGradient)" 
+          stroke="#F07A5A" 
+          stroke-width="3" 
+          stroke-dasharray="8 8" />
+
+    <!-- 2. Main Document -->
+    <g>
+      <!-- Document Body -->
+      <path d="M 70 20 L 230 20 L 300 90 L 300 280 L 70 280 Z" fill="url(#docGradient)" />
+      
+      <!-- Folded Corner -->
+      <path d="M 230 20 L 300 90 L 230 90 Z" fill="#D12C06" opacity="0.4"/>
+      <path d="M 230 20 L 300 90 L 230 90 Z" fill="#FFA07A" opacity="0.7"/>
+    </g>
+
+    <!-- 3. The Right-pointing Arrow -->
+    <g transform="translate(140, 130)" fill="#131313">
+      <!-- Arrow Shaft -->
+      <rect x="0" y="18" width="55" height="28" />
+      
+      <!-- Arrow Head -->
+      <polygon points="45,0 105,32 45,64" />
+    </g>
+
+    <!-- 4. Sparkle / Star Icon -->
+    <g transform="translate(255, 95)">
+      <path d="M 10 0 C 10 5.52 5.52 10 0 10 C 5.52 10 10 14.48 10 20 C 10 14.48 14.48 10 20 10 C 14.48 10 10 5.52 10 0 Z" fill="#FFFFFF" />
+    </g>
+
+  </g>
+</svg>
