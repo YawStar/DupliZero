@@ -39,7 +39,44 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Artifacts
+      # ==========================================
+      # Portable Archive များ ဖန်တီးခြင်း
+      # ==========================================
+
+      # Windows အတွက် Portable .zip ဖန်တီးခြင်း
+      - name: Create Portable ZIP (Windows)
+        if: matrix.platform == 'windows-latest'
+        shell: bash
+        run: |
+          cd src-tauri/target/release
+          # du-finder.exe ကို DupliZero.exe လို့ နာမည်ပြောင်းပြီး zip လုပ်မယ် (မရှိရင် ကျော်သွားမယ်)
+          if [ -f "du-finder.exe" ]; then
+            cp du-finder.exe DupliZero.exe
+            tar -a -c -f DupliZero-windows-portable.zip DupliZero.exe
+          fi
+
+      # Linux အတွက် Portable .tar.gz ဖန်တီးခြင်း
+      - name: Create Portable tar.gz (Linux)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          cd src-tauri/target/release
+          if [ -f "du-finder" ]; then
+            cp du-finder duplizero
+            tar -czvf DupliZero-linux-portable.tar.gz duplizero
+          fi
+
+      # macOS အတွက် Portable .tar.gz ဖန်တီးခြင်း
+      - name: Create Portable tar.gz (macOS)
+        if: matrix.platform == 'macos-latest'
+        run: |
+          cd src-tauri/target/release/bundle/macos
+          if [ -d "DupliZero.app" ]; then
+            tar -czvf ../../../DupliZero-macos-portable.tar.gz DupliZero.app
+          fi
+
+      # ==========================================
+      # Artifacts များ တင်ခြင်း
+      # ==========================================
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -51,4 +88,6 @@ jobs:
             src-tauri/target/release/bundle/appimage/*.AppImage
             src-tauri/target/release/bundle/dmg/*.dmg
             src-tauri/target/release/bundle/macos/*.app
+            src-tauri/target/release/*.zip
+            src-tauri/target/release/*.tar.gz
           if-no-files-found: ignore
