@@ -35,11 +35,12 @@ pub struct AppState {
 // ----- Helpers -----
 fn get_db_conn() -> Connection {
     let mut db_dir = dirs::data_dir().unwrap_or_else(|| PathBuf::from("."));
-    db_dir.push("com.yawstar.du-finder");
+    db_dir.push("YawStar"); 
+    db_dir.push("DupliZero"); 
     if !db_dir.exists() {
         fs::create_dir_all(&db_dir).expect("Failed to create DB directory");
     }
-    let db_path = db_dir.join("files.db");
+    let db_path = db_dir.join("database.db");
     Connection::open(db_path).expect("Failed to open DB")
 }
 
